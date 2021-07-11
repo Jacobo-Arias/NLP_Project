@@ -1,6 +1,9 @@
 
 # Análisis de sentimientos en Twitter 👎👍
 
+Desarrollado por Jacobo Arias. <br>
+Github: [@Jacobo-Arias](https://github.com/Jacobo-Arias)
+
 ## Resumen
 
 Twitter se podría considerar como un mini blog donde las personas publican tuits sobre politica, algun tema de deportes, chismes o incluso simples pensamientos que se les ocurran, en este trabajo se toma una base de datos con 1'600.000 [1]  tuits clasificados entre positivos y negativos (4 y 0 respectivamente) y se compara con la clasificación dada por la red preentranada para clasificación de sentimientos VADER con los datos en crudo y con un pre-procesamiento dado, el cual incluye tokenización, eliminación de stopwords, eliminación de símbolos no alfabéticos y lematización dando un resultado muy similar, ambos al rededor del 50%-51% de efectividad; Posteriormente se realiza el mismo ejercicio con Stanza, otra herramiente para la clasificación de sentimientos desarollada por el grupo de procesamiento de lenguaje natural de la Universidad de Stanford, para ambos casos se utilizaron 50000 datos positivos y negativos elegidos aleatoriamente ya que el tiempo de procesamiento con esta herramienta es mayor, dando como resultados 48.99% y 38.82% de acierto con los datos si procesar y procesados respectivamente.
@@ -44,12 +47,17 @@ El análisis de sentimientos ha sido aplicado en distintas áreas como lo son el
 
 Con el desarrollo de este proyecto se busca analizar dos herramientas existentes en el análisis de sentimientos y evaluar sus resultados con y sin un pre-procesamiento previo.
 
+## Desarrollo 
+
+Para ejecutar este cuaderno se debe descargar la base de datos [aqui](https://www.kaggle.com/kazanova/sentiment140), extraer un archivo en una carpeta llamada *tweets_data* y renombrarlo como *Raw_tweets.csv*, dicha carpeta debe estar en el mismo directorio que este cuaderno de jupyter
+
+Las librerías requeridas para este proyecto son: nltk, stanza, python-csv y matplotlib, si no tiene alguna de estas instaladas decomentar la línea correspondiente en la siguiente celda y ejecutarla
+
 
 ```python
 # !pip install nltk
 # !pip install stanza
 # !pip install python-csv
-# !pip install langdetect
 # !pip install matplotlib
 ```
 
@@ -591,7 +599,9 @@ texto,vacio
 | Stanza| 48.99% | 38.82% |
 
 Luego de analizar los resultados se concluye que en parte los bajos porcentajes de acierto se deben a que no todos los tuits están en inglés, ya que cuando se analiza un tuit que no está en ingles el resultado arroja que es neutro.
+
 En el caso de VADER tiene sentido que con el pre-procesamiento baje el porcentaje de acierto ya que esta herramienta  está especialmente entrenada para aumentar el peso de la calificación basado en la forma de escribir en redes sociales, tales como signos de puntuación y emoticones.
+
 Para el caso de Stanza los porcentajes tan bajo se podría atribuir los bajos porcentajes a que Stanza analiza los textos por sentencias, por lo que se realizó un promedio del valor de todas sus sentencias, se podría mejorar el porcentaje de acierto aplicando otras estrategias con Stanza o simplemente dejando por fuera el intervalo de neutro.
 
 ## Conclusiones
